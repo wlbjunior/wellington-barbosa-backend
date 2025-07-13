@@ -1,0 +1,11 @@
+services:
+    type: web
+    name: wellington-barbosa-backend
+    env: docker
+    dockerfilePath: Dockerfile
+    ports: 5000
+    pullRequestPreviews: 
+      autoDeploy: true
+    autoDeploy: true
+
+
