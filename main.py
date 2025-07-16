@@ -4,12 +4,18 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src'))
 
 from flask import Flask, send_from_directory
+from flask_cors import CORS
 from src.routes.filosofia import filosofia_bp
 
 app = Flask(__name__, static_folder=os.path.join(os.path.dirname(__file__), 'static'))
+CORS(app)
 app.config['SECRET_KEY'] = 'asdf#FGSgvasgf$5$WGT'
 
 app.register_blueprint(filosofia_bp, url_prefix='/api/filosofia')
+
+@app.route("/test")
+def test_route():
+    return "Backend is running!"
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
@@ -30,5 +36,7 @@ def serve(path):
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
+
+
 
 

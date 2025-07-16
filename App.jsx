@@ -365,7 +365,7 @@ function FilosofiaPage() {
               </div>
               <Button 
                 className="w-full bg-orange-500 hover:bg-orange-600"
-                onClick={() => window.open('https://ijjcdorp.manus.space', '_blank')}
+                onClick={() => window.open("https://wellington-barbosa-backend.onrender.com/api/filosofia/timeline", "_blank")}
               >
                 Acessar Linha do Tempo
               </Button>
