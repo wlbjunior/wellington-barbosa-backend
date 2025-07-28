@@ -1,42 +1,32 @@
-import os
-import sys
-
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src'))
-
-from flask import Flask, send_from_directory
+from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
-from src.routes.filosofia import filosofia_bp
+import os
 
-app = Flask(__name__, static_folder=os.path.join(os.path.dirname(__file__), 'static'))
+# Importar os dados da linha do tempo da filosofia
+from filosofia import timeline_data
+
+app = Flask(__name__, static_folder='./static', static_url_path='/')
 CORS(app)
-app.config['SECRET_KEY'] = 'asdf#FGSgvasgf$5$WGT'
 
-app.register_blueprint(filosofia_bp, url_prefix='/api/filosofia')
-
-@app.route("/test")
+# Rota de teste
+@app.route('/test')
 def test_route():
-    return "Backend is running!"
+    return 'Hello from Flask!'
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def serve(path):
-    static_folder_path = app.static_folder
-    if static_folder_path is None:
-            return "Static folder not configured", 404
+# Rota para a linha do tempo da filosofia
+@app.route('/api/filosofia/timeline')
+def filosofia_timeline():
+    return jsonify(timeline_data)
 
-    if path != "" and os.path.exists(os.path.join(static_folder_path, path)):
-        return send_from_directory(static_folder_path, path)
-    else:
-        index_path = os.path.join(static_folder_path, 'index.html')
-        if os.path.exists(index_path):
-            return send_from_directory(static_folder_path, 'index.html')
-        else:
-            return "index.html not found", 404
+# Rota para servir o index.html do frontend
+@app.route('/')
+def serve_index():
+    return send_from_directory(app.static_folder, 'index.html')
 
+# Rota para servir outros arquivos estáticos (CSS, JS, etc.)
+@app.route('/<path:filename>')
+def serve_static(filename):
+    return send_from_directory(app.static_folder, filename)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
-
-
-
-
+    app.run(debug=True, host='0.0.0.0', port=5000)
