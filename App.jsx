@@ -63,7 +63,7 @@ function Navigation() {
           <div className="md:hidden flex items-center">
             <Button
               variant="ghost"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={( ) => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </Button>
@@ -103,7 +103,7 @@ function Navigation() {
               </a>
             </div>
           </div>
-        )}
+         )}
       </div>
     </nav>
   )
@@ -225,7 +225,7 @@ function HomePage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Áreas de Conhecimento</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {categories.map((category) => (
+          {categories.map((category ) => (
             <Card key={category.name} className="hover:shadow-xl transition-shadow duration-300 cursor-pointer group">
               <CardHeader>
                 <div className="flex items-center space-x-3">
@@ -285,10 +285,10 @@ function HomePage() {
         </div>
       </footer>
     </div>
-  )
+   )
 }
 
-// // Página de Filosofia
+// Página de Filosofia
 function FilosofiaPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-orange-100">
@@ -322,7 +322,7 @@ function FilosofiaPage() {
               </CardDescription>
               <Button 
                 className="w-full bg-white text-orange-500 hover:bg-orange-50"
-                onClick={() => window.open('https://institutodedalus.com/cursos/filosofia4/', '_blank')}
+                onClick={() => window.open('https://institutodedalus.com/cursos/filosofia/', '_blank' )}
               >
                 <GraduationCap className="w-4 h-4 mr-2" />
                 Acessar Curso de Filosofia
@@ -363,12 +363,11 @@ function FilosofiaPage() {
                   <span className="text-sm text-gray-600">Filosofia mundial e brasileira</span>
                 </div>
               </div>
-              <Button 
-                className="w-full bg-orange-500 hover:bg-orange-600"
-                onClick={() => window.open("https://wellington-barbosa-backend.onrender.com/api/filosofia/timeline", "_blank")}
-              >
-                Acessar Linha do Tempo
-              </Button>
+              <Link to="/filosofia/timeline">
+                <Button className="w-full bg-orange-500 hover:bg-orange-600">
+                  Acessar Linha do Tempo
+                </Button>
+              </Link>
             </CardContent>
           </Card>
 
@@ -447,7 +446,7 @@ function ReligiaoPage() {
               </CardDescription>
               <Button 
                 className="w-full bg-white text-gray-600 hover:bg-gray-50"
-                onClick={() => window.open('https://institutodedalus.com/cursos/religiao/', '_blank')}
+                onClick={() => window.open('https://institutodedalus.com/cursos/religiao/', '_blank' )}
               >
                 <GraduationCap className="w-4 h-4 mr-2" />
                 Acessar Curso de Religião
@@ -541,7 +540,7 @@ function ReligiaoPage() {
 function PrincipaisReligioesPage() {
   const religions = [
     {
-      name: 'Cristianismo',
+      name: 'Cristianismo', 
       followers: '2.4 bilhões',
       description: 'O Cristianismo é a maior religião do mundo, baseada nos ensinamentos de Jesus Cristo. Sua doutrina central gira em torno da fé em Jesus como o Filho de Deus e salvador da humanidade.',
       characteristics: [
@@ -683,7 +682,7 @@ function MitologiaPage() {
               </CardDescription>
               <Button 
                 className="w-full bg-white text-blue-500 hover:bg-blue-50"
-                onClick={() => window.open('https://institutodedalus.com/cursos/mitologia5/', '_blank')}
+                onClick={() => window.open('https://institutodedalus.com/cursos/mitologia5/', '_blank' )}
               >
                 <GraduationCap className="w-4 h-4 mr-2" />
                 Acessar Curso de Mitologia
@@ -755,7 +754,7 @@ function ArtesPage() {
               </CardDescription>
               <Button 
                 className="w-full bg-white text-pink-500 hover:bg-pink-50"
-                onClick={() => window.open('https://institutodedalus.com/cursos/arte/', '_blank')}
+                onClick={() => window.open('https://institutodedalus.com/cursos/arte/', '_blank' )}
               >
                 <GraduationCap className="w-4 h-4 mr-2" />
                 Acessar Curso de Artes
@@ -779,7 +778,7 @@ function ArtesPage() {
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base mb-4">
-                Novos conteúdos sobre artes serão adicionados em breve.
+                Novos conteúdos sobre artes serão adicionado em breve.
               </CardDescription>
               <Button 
                 className="w-full bg-pink-400 cursor-not-allowed"
@@ -827,7 +826,7 @@ function PsicologiaJuridicaPage() {
               </CardDescription>
               <Button 
                 className="w-full bg-white text-gray-800 hover:bg-gray-50"
-                onClick={() => window.open('https://institutodedalus.com/cursos/juridica/', '_blank')}
+                onClick={() => window.open('https://institutodedalus.com/cursos/juridica/', '_blank' )}
               >
                 <GraduationCap className="w-4 h-4 mr-2" />
                 Acessar Curso de Psicologia Jurídica
@@ -945,7 +944,7 @@ function SobreMimPage() {
         </div>
       </div>
     </div>
-  )
+   )
 }
 
 function PsicoterapiaPage() {
@@ -1011,8 +1010,10 @@ function PsicoterapiaPage() {
         </div>
       </div>
     </div>
-  )
+   )
 }
+
+import FilosofiaTimelinePage from './FilosofiaTimelinePage';
 
 function App() {
   return (
@@ -1020,6 +1021,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/filosofia" element={<FilosofiaPage />} />
+        <Route path="/filosofia/timeline" element={<FilosofiaTimelinePage />} />
         <Route path="/religiao" element={<ReligiaoPage />} />
         <Route path="/religiao/principais-religioes" element={<PrincipaisReligioesPage />} />
         <Route path="/mitologia" element={<MitologiaPage />} />
@@ -1034,4 +1036,3 @@ function App() {
 }
 
 export default App
-
